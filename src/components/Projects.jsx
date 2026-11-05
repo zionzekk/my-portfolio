@@ -5,7 +5,7 @@ export default function Projects() {
     <section id="projects" className="py-24 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl font-bold text-center text-slate-900 dark:text-white mb-4">
-          Featured <span className="text-primary-600 dark:text-primary-400">Projects</span>
+          Featured <span className="bg-gradient-to-r from-primary-600 to-purple-500 bg-clip-text text-transparent">Projects</span>
         </h2>
         <div className="w-16 h-1 bg-primary-600 mx-auto rounded-full mb-12"></div>
 

@@ -2,12 +2,18 @@ import { profile } from '../data/content'
 
 export default function Hero() {
   return (
-    <section id="home" className="min-h-screen flex items-center pt-16 bg-gradient-to-br from-primary-50 via-white to-indigo-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid md:grid-cols-2 gap-12 items-center">
+    <section id="home" className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-gradient-to-br from-primary-50 via-white to-indigo-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
+      <div className="absolute top-20 -left-20 w-72 h-72 bg-primary-300/30 dark:bg-primary-600/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-indigo-300/30 dark:bg-indigo-600/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-purple-300/20 dark:bg-purple-600/10 rounded-full blur-3xl"></div>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid md:grid-cols-2 gap-12 items-center">
         <div className="animate-fade-in-up">
           <p className="text-primary-600 dark:text-primary-400 font-semibold mb-2">Hello, I'm</p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">
-            {profile.name}
+            {profile.name.split(' ')[0]}{' '}
+            <span className="bg-gradient-to-r from-primary-600 via-indigo-500 to-purple-500 bg-clip-text text-transparent">
+              {profile.name.split(' ').slice(1).join(' ')}
+            </span>
           </h1>
           <h2 className="text-xl sm:text-2xl text-primary-600 dark:text-primary-400 font-medium mt-3">
             {profile.title}
@@ -57,8 +63,13 @@ export default function Hero() {
 
         <div className="flex justify-center md:justify-end animate-fade-in">
           <div className="relative">
-            <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-3xl bg-gradient-to-br from-primary-500 to-indigo-600 flex items-center justify-center shadow-2xl animate-float">
-              <span className="text-7xl sm:text-8xl font-bold text-white">TZ</span>
+            <div className="absolute -inset-4 bg-gradient-to-tr from-primary-500 via-indigo-500 to-purple-500 rounded-[2rem] blur-2xl opacity-40 animate-pulse"></div>
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-[2rem] overflow-hidden shadow-2xl ring-4 ring-white dark:ring-slate-800 animate-float">
+              <img
+                src="/profile.jpg"
+                alt="Tsion Zekaryas"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div className="absolute -bottom-4 -right-4 bg-white dark:bg-slate-800 rounded-2xl shadow-xl px-5 py-3 flex items-center gap-2">
               <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>

@@ -1,11 +1,11 @@
 export const profile = {
   name: 'Tsion Zekaryas',
   title: 'Computer Science Graduate | Junior Front-End Developer',
-  email: 'tsionzekaryas@gmail.com',
-  phone: '+251 9XX XXX XXX',
+  email: 'tsionzekaryas49@gmail.com',
+  phone: '+251 962 633 441',
   location: 'Addis Ababa, Ethiopia',
-  github: 'https://github.com/tsionzekaryas',
-  linkedin: 'https://linkedin.com/in/tsion-zekaryas',
+  github: 'https://github.com/zionzekk',
+  linkedin: 'https://www.linkedin.com/',
   cvUrl: '/cv.pdf',
 }
 
@@ -59,7 +59,7 @@ export const projects = [
     description:
       'A platform connecting Ethiopian talent with opportunities. Features job listings, talent profiles, and a modern responsive interface built for the local tech ecosystem.',
     tech: ['React', 'Tailwind CSS', 'Node.js', 'MongoDB'],
-    github: 'https://github.com/tsionzekaryas/etn',
+    github: 'https://github.com/ethiopian-talent-network/ETN',
     demo: '#',
     color: 'from-indigo-500 to-purple-600',
   },
@@ -68,7 +68,7 @@ export const projects = [
     description:
       'A real-time chat application enabling instant messaging between users. Built with a responsive UI, authentication, and REST API integration.',
     tech: ['React', 'Node.js', 'Express.js', 'MongoDB'],
-    github: 'https://github.com/tsionzekaryas/chatify',
+    github: 'https://github.com/zionzekk/chatify',
     demo: '#',
     color: 'from-sky-500 to-cyan-500',
   },
@@ -77,7 +77,7 @@ export const projects = [
     description:
       'A food tracking application that helps users log meals, track nutrition, and monitor eating habits with an intuitive dashboard.',
     tech: ['React', 'Tailwind CSS', 'JavaScript'],
-    github: 'https://github.com/tsionzekaryas/tasetrack',
+    github: '#',
     demo: '#',
     color: 'from-emerald-500 to-teal-500',
   },
