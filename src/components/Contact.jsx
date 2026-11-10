@@ -1,24 +1,47 @@
 import { useState } from 'react'
 import { profile } from '../data/content'
+import Reveal from './Reveal'
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
+  const [errors, setErrors] = useState({})
   const [sent, setSent] = useState(false)
+
+  const validate = () => {
+    const e = {}
+    if (!form.name.trim()) e.name = 'Name is required'
+    if (!form.email.trim()) e.email = 'Email is required'
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Enter a valid email'
+    if (!form.subject.trim()) e.subject = 'Subject is required'
+    if (!form.message.trim()) e.message = 'Message is required'
+    else if (form.message.trim().length < 10) e.message = 'Message must be at least 10 characters'
+    setErrors(e)
+    return Object.keys(e).length === 0
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`)
+    if (!validate()) return
+    const subject = encodeURIComponent(form.subject)
     const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`)
     window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`
     setSent(true)
     setTimeout(() => setSent(false), 4000)
   }
 
+  const inputClass = (field) =>
+    `w-full px-4 py-3 rounded-lg border bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:ring-2 ${
+      errors[field]
+        ? 'border-red-400 focus:ring-red-400'
+        : 'border-slate-300 dark:border-slate-600 focus:ring-primary-500'
+    }`
+
   return (
     <section id="contact" className="py-24 bg-white dark:bg-slate-900">
+      <Reveal>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl font-bold text-center text-slate-900 dark:text-white mb-4">
-          Contact <span className="bg-gradient-to-r from-primary-600 to-purple-500 bg-clip-text text-transparent">Me</span>
+          Contact <span className="bg-gradient-to-r from-primary-600 to-cyan-400 bg-clip-text text-transparent">Me</span>
         </h2>
         <div className="w-16 h-1 bg-primary-600 mx-auto rounded-full mb-12"></div>
 
@@ -87,9 +110,10 @@ export default function Contact() {
                 required
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className={inputClass('name')}
                 placeholder="Your name"
               />
+              {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
             </div>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Email</label>
@@ -99,9 +123,21 @@ export default function Contact() {
                 required
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className={inputClass('email')}
                 placeholder="your@email.com"
               />
+              {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
+            </div>
+            <div>
+              <label htmlFor="subject" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Subject</label>
+              <input
+                id="subject"
+                value={form.subject}
+                onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                className={inputClass('subject')}
+                placeholder="What's this about?"
+              />
+              {errors.subject && <p className="text-xs text-red-500 mt-1">{errors.subject}</p>}
             </div>
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Message</label>
@@ -111,9 +147,10 @@ export default function Contact() {
                 rows="5"
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
+                className={`${inputClass('message')} resize-none`}
                 placeholder="Write your message..."
               />
+              {errors.message && <p className="text-xs text-red-500 mt-1">{errors.message}</p>}
             </div>
             <button
               type="submit"
@@ -124,6 +161,7 @@ export default function Contact() {
           </form>
         </div>
       </div>
+      </Reveal>
     </section>
   )
 }

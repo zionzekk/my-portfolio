@@ -6,25 +6,31 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
         primary: {
-          50: '#eef2ff',
-          100: '#e0e7ff',
-          200: '#c7d2fe',
-          300: '#a5b4fc',
-          400: '#818cf8',
-          500: '#6366f1',
-          600: '#4f46e5',
-          700: '#4338ca',
-          800: '#3730a3',
-          900: '#312e81',
+          50: '#f0f9ff',
+          100: '#e0f2fe',
+          200: '#bae6fd',
+          300: '#7dd3fc',
+          400: '#38bdf8',
+          500: '#0ea5e9',
+          600: '#0085CA',
+          700: '#0369a1',
+          800: '#075985',
+          900: '#0c4a6e',
+        },
+        navy: {
+          DEFAULT: '#0F172A',
+          surface: '#1E293B',
         },
       },
       animation: {
         'fade-in-up': 'fadeInUp 0.7s ease-out forwards',
         'fade-in': 'fadeIn 0.8s ease-out forwards',
         float: 'float 6s ease-in-out infinite',
+        blink: 'blink 1s step-end infinite',
       },
       keyframes: {
         fadeInUp: {
@@ -38,6 +44,10 @@ export default {
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-12px)' },
+        },
+        blink: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0' },
         },
       },
     },

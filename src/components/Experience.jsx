@@ -1,18 +1,20 @@
 import { experience } from '../data/content'
+import Reveal from './Reveal'
 
 export default function Experience() {
   return (
     <section id="experience" className="py-24 bg-white dark:bg-slate-900">
+      <Reveal>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl font-bold text-center text-slate-900 dark:text-white mb-4">
-          Professional <span className="bg-gradient-to-r from-primary-600 to-purple-500 bg-clip-text text-transparent">Experience</span>
+          Professional <span className="bg-gradient-to-r from-primary-600 to-cyan-400 bg-clip-text text-transparent">Experience</span>
         </h2>
         <div className="w-16 h-1 bg-primary-600 mx-auto rounded-full mb-12"></div>
 
         <div className="max-w-3xl mx-auto space-y-8">
           {experience.map((job, i) => (
+            <Reveal key={i} delay={i * 120}>
             <div
-              key={i}
               className="relative pl-8 border-l-2 border-primary-200 dark:border-primary-800"
             >
               <span className="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-primary-600 border-4 border-white dark:border-slate-900"></span>
@@ -24,12 +26,23 @@ export default function Experience() {
                   </span>
                 </div>
                 <p className="text-primary-600 dark:text-primary-400 font-medium mb-3">{job.company}</p>
-                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{job.description}</p>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">{job.description}</p>
+                {job.tech && (
+                  <div className="flex flex-wrap gap-2">
+                    {job.tech.map((t) => (
+                      <span key={t} className="text-xs px-2.5 py-1 rounded-full bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 font-medium">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
+            </Reveal>
           ))}
         </div>
       </div>
+      </Reveal>
     </section>
   )
 }

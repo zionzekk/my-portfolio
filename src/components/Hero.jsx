@@ -1,23 +1,59 @@
+import { useEffect, useState } from 'react'
 import { profile } from '../data/content'
 
+const roles = ['Frontend Developer', 'React Enthusiast', 'UI/UX Learner', 'Problem Solver']
+
+function useTyping(roles) {
+  const [text, setText] = useState('')
+  const [roleIndex, setRoleIndex] = useState(0)
+  const [deleting, setDeleting] = useState(false)
+
+  useEffect(() => {
+    const current = roles[roleIndex]
+    const timeout = setTimeout(() => {
+      if (!deleting) {
+        setText(current.slice(0, text.length + 1))
+        if (text.length + 1 === current.length) {
+          setTimeout(() => setDeleting(true), 1500)
+        }
+      } else {
+        setText(current.slice(0, text.length - 1))
+        if (text.length - 1 === 0) {
+          setDeleting(false)
+          setRoleIndex((i) => (i + 1) % roles.length)
+        }
+      }
+    }, deleting ? 40 : 90)
+    return () => clearTimeout(timeout)
+  }, [text, deleting, roleIndex, roles])
+
+  return text
+}
+
 export default function Hero() {
+  const typed = useTyping(roles)
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-gradient-to-br from-primary-50 via-white to-indigo-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
       <div className="absolute top-20 -left-20 w-72 h-72 bg-primary-300/30 dark:bg-primary-600/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-indigo-300/30 dark:bg-indigo-600/10 rounded-full blur-3xl"></div>
-      <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-purple-300/20 dark:bg-purple-600/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-cyan-300/20 dark:bg-cyan-500/10 rounded-full blur-3xl"></div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid md:grid-cols-2 gap-12 items-center">
         <div className="animate-fade-in-up">
           <p className="text-primary-600 dark:text-primary-400 font-semibold mb-2">Hello, I'm</p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight">
             {profile.name.split(' ')[0]}{' '}
-            <span className="bg-gradient-to-r from-primary-600 via-indigo-500 to-purple-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary-600 via-sky-500 to-cyan-400 bg-clip-text text-transparent">
               {profile.name.split(' ').slice(1).join(' ')}
             </span>
           </h1>
-          <h2 className="text-xl sm:text-2xl text-primary-600 dark:text-primary-400 font-medium mt-3">
+          <h2 className="text-xl sm:text-2xl text-primary-600 dark:text-primary-400 font-medium mt-3 min-h-[2rem]">
             {profile.title}
           </h2>
+          <p className="mt-2 text-lg font-semibold text-slate-700 dark:text-slate-300">
+            <span className="text-primary-600 dark:text-primary-400">I am a </span>
+            {typed}
+            <span className="inline-block w-[3px] h-6 bg-primary-500 ml-1 animate-blink align-middle"></span>
+          </p>
           <p className="mt-6 text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed">
             Passionate about crafting clean, responsive, and user-friendly web experiences.
             I turn ideas into elegant interfaces using modern frontend technologies.
@@ -63,7 +99,7 @@ export default function Hero() {
 
         <div className="flex justify-center md:justify-end animate-fade-in">
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-tr from-primary-500 via-indigo-500 to-purple-500 rounded-[2rem] blur-2xl opacity-40 animate-pulse"></div>
+            <div className="absolute -inset-4 bg-gradient-to-tr from-primary-600 via-sky-500 to-cyan-400 rounded-[2rem] blur-2xl opacity-40 animate-pulse"></div>
             <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-[2rem] overflow-hidden shadow-2xl ring-4 ring-white dark:ring-slate-800 animate-float">
               <img
                 src="/profile.jpg"

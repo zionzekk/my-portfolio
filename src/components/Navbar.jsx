@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
+import { Sun, Moon, Menu, X } from 'lucide-react'
 import { profile } from '../data/content'
 
 const links = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
+  { label: 'Projects', href: '#projects' },
   { label: 'Experience', href: '#experience' },
   { label: 'Education', href: '#education' },
-  { label: 'Projects', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -39,56 +40,68 @@ export default function Navbar({ dark, toggleDark }) {
             <a
               key={l.href}
               href={l.href}
-              className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              className="relative text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors after:absolute after:bottom-[-4px] after:left-0 after:h-0.5 after:w-0 after:bg-primary-600 after:transition-all after:duration-300 hover:after:w-full"
             >
               {l.label}
             </a>
           ))}
+          <a
+            href={profile.cvUrl}
+            download
+            className="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-semibold rounded-lg shadow-lg shadow-primary-600/30 transition-all hover:-translate-y-0.5"
+          >
+            Download CV
+          </a>
           <button
             onClick={toggleDark}
             aria-label="Toggle dark mode"
-            className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-navy-surface transition-colors"
           >
-            {dark ? (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-            ) : (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-            )}
+            {dark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
         </div>
 
         <div className="md:hidden flex items-center gap-2">
+          <a
+            href={profile.cvUrl}
+            download
+            className="px-3 py-1.5 bg-primary-600 text-white text-xs font-semibold rounded-lg"
+          >
+            CV
+          </a>
           <button onClick={toggleDark} aria-label="Toggle dark mode" className="p-2 text-slate-600 dark:text-slate-300">
-            {dark ? '☀️' : '🌙'}
+            {dark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
           <button
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
             className="p-2 text-slate-700 dark:text-slate-200"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              {open ? (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
+            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </nav>
 
       {open && (
-        <div className="md:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-4 py-4 space-y-3">
+        <div className="md:hidden bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-4 py-4 space-y-3 animate-fade-in">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="block text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-primary-600"
+              className="block text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               {l.label}
             </a>
           ))}
+          <a
+            href={profile.cvUrl}
+            download
+            onClick={() => setOpen(false)}
+            className="block w-full text-center px-4 py-2.5 bg-primary-600 text-white text-sm font-semibold rounded-lg"
+          >
+            Download CV
+          </a>
         </div>
       )}
     </header>

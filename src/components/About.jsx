@@ -1,11 +1,13 @@
 import { profile } from '../data/content'
+import Reveal from './Reveal'
 
 export default function About() {
   return (
     <section id="about" className="py-24 bg-white dark:bg-slate-900">
+      <Reveal>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl font-bold text-center text-slate-900 dark:text-white mb-4">
-          About <span className="bg-gradient-to-r from-primary-600 to-purple-500 bg-clip-text text-transparent">Me</span>
+          About <span className="bg-gradient-to-r from-primary-600 to-cyan-400 bg-clip-text text-transparent">Me</span>
         </h2>
         <div className="w-16 h-1 bg-primary-600 mx-auto rounded-full mb-12"></div>
 
@@ -42,6 +44,7 @@ export default function About() {
           </div>
         </div>
       </div>
+      </Reveal>
     </section>
   )
 }

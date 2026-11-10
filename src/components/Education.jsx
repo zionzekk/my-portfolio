@@ -1,31 +1,38 @@
 import { education } from '../data/content'
+import Reveal from './Reveal'
 
 export default function Education() {
   return (
     <section id="education" className="py-24 bg-slate-50 dark:bg-slate-800/50">
+      <Reveal>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl font-bold text-center text-slate-900 dark:text-white mb-4">
-          <span className="bg-gradient-to-r from-primary-600 to-purple-500 bg-clip-text text-transparent">Education</span>
+          <span className="bg-gradient-to-r from-primary-600 to-cyan-400 bg-clip-text text-transparent">Education</span>
         </h2>
         <div className="w-16 h-1 bg-primary-600 mx-auto rounded-full mb-12"></div>
 
         <div className="max-w-3xl mx-auto space-y-8">
           {education.map((edu, i) => (
+            <Reveal key={i} delay={i * 120}>
             <div
-              key={i}
               className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
             >
               <div>
                 <h3 className="text-xl font-semibold text-slate-900 dark:text-white">{edu.degree}</h3>
                 <p className="text-primary-600 dark:text-primary-400 font-medium mt-1">{edu.school}</p>
+                {edu.cgpa && (
+                  <p className="text-sm text-emerald-600 dark:text-emerald-400 font-medium mt-1">{edu.cgpa}</p>
+                )}
               </div>
               <span className="text-sm font-medium text-slate-500 dark:text-slate-400 whitespace-nowrap">
                 {edu.period}
               </span>
             </div>
+            </Reveal>
           ))}
         </div>
       </div>
+      </Reveal>
     </section>
   )
 }
