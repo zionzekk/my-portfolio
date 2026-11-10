@@ -1,3 +1,5 @@
+import cvFile from '../assets/Tsion_Zekaryas_Resume1.pdf'
+
 export const profile = {
   name: 'Tsion Zekaryas',
   title: 'Junior Web Developer',
@@ -6,7 +8,7 @@ export const profile = {
   location: 'Addis Ababa, Ethiopia',
   github: 'https://github.com/zionzekk',
   linkedin: 'https://www.linkedin.com/',
-  cvUrl: '/cv.pdf',
+  cvUrl: cvFile,
 }
 
 export const skills = [
